@@ -8,6 +8,10 @@ namespace Spotify_Small
     {
         [DllImport("user32.dll", SetLastError = true)]
         private static extern void keybd_event(byte virtualKey, byte scanCode, uint flags, IntPtr extraInfo);
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         private const int VK_MEDIA_NEXT_TRACK = 0xB0;        // Next
         private const int VK_MEDIA_PLAY_PAUSE = 0xB3;        // Pause
@@ -15,12 +19,16 @@ namespace Spotify_Small
         private const int KEYEVENTF_EXTENDEDKEY = 0x0001;    // Key down flag
         private const int KEYEVENTF_KEYUP = 0x0002;          // Key up flag
 
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+        private const int HT_CAPTION = 0x2;
+
         // Scraper to get the spotify status
         private Scraper scraper;
 
         public FormMain()
         {
             InitializeComponent();
+            this.TopMost = true;
 
             // Create scraper
             scraper = new Scraper();
@@ -57,6 +65,29 @@ namespace Spotify_Small
         {
             keybd_event(VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_EXTENDEDKEY, IntPtr.Zero);
             keybd_event(VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_KEYUP, IntPtr.Zero);
+        }
+
+        // Drag the form around
+        private void FormMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        // Exit
+        private void lb_Exit_MouseClick(object sender, MouseEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        // Toggle 'always on top'
+        private void lb_AlwaysOnTop_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.TopMost = !this.TopMost;
+            lb_AlwaysOnTop.Text = this.TopMost ? "Always on top: ON" : "Always on top: OFF";
         }
     }
 }

@@ -34,6 +34,8 @@
             this.pb_Next = new System.Windows.Forms.PictureBox();
             this.pb_Pause = new System.Windows.Forms.PictureBox();
             this.pb_Prev = new System.Windows.Forms.PictureBox();
+            this.lb_Exit = new System.Windows.Forms.Label();
+            this.lb_AlwaysOnTop = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Next)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Pause)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Prev)).BeginInit();
@@ -99,23 +101,52 @@
             this.pb_Prev.TabStop = false;
             this.pb_Prev.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PrevSong);
             // 
+            // lb_Exit
+            // 
+            this.lb_Exit.AutoSize = true;
+            this.lb_Exit.BackColor = System.Drawing.Color.Transparent;
+            this.lb_Exit.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Exit.ForeColor = System.Drawing.Color.White;
+            this.lb_Exit.Location = new System.Drawing.Point(423, 9);
+            this.lb_Exit.Name = "lb_Exit";
+            this.lb_Exit.Size = new System.Drawing.Size(30, 16);
+            this.lb_Exit.TabIndex = 5;
+            this.lb_Exit.Text = "Exit";
+            this.lb_Exit.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lb_Exit_MouseClick);
+            // 
+            // lb_AlwaysOnTop
+            // 
+            this.lb_AlwaysOnTop.AutoSize = true;
+            this.lb_AlwaysOnTop.BackColor = System.Drawing.Color.Transparent;
+            this.lb_AlwaysOnTop.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_AlwaysOnTop.ForeColor = System.Drawing.Color.White;
+            this.lb_AlwaysOnTop.Location = new System.Drawing.Point(12, 100);
+            this.lb_AlwaysOnTop.Name = "lb_AlwaysOnTop";
+            this.lb_AlwaysOnTop.Size = new System.Drawing.Size(106, 15);
+            this.lb_AlwaysOnTop.TabIndex = 6;
+            this.lb_AlwaysOnTop.Text = "Always on top: ON";
+            this.lb_AlwaysOnTop.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lb_AlwaysOnTop_MouseClick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(465, 125);
+            this.Controls.Add(this.lb_AlwaysOnTop);
+            this.Controls.Add(this.lb_Exit);
             this.Controls.Add(this.pb_Prev);
             this.Controls.Add(this.pb_Pause);
             this.Controls.Add(this.pb_Next);
             this.Controls.Add(this.lb_CurrentSong);
             this.Controls.Add(this.lb_CurrentSongHolder);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "Spotify song";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pb_Next)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Pause)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Prev)).EndInit();
@@ -131,5 +162,7 @@
         private System.Windows.Forms.PictureBox pb_Next;
         private System.Windows.Forms.PictureBox pb_Pause;
         private System.Windows.Forms.PictureBox pb_Prev;
+        private System.Windows.Forms.Label lb_Exit;
+        private System.Windows.Forms.Label lb_AlwaysOnTop;
     }
 }
